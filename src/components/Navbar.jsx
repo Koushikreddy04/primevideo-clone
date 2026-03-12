@@ -46,24 +46,15 @@ export default function Navbar() {
   useEffect(() => {
     const handleClickOutside = (event) => {
 
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target)
-      ) {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearch(false)
       }
 
-      if (
-        langRef.current &&
-        !langRef.current.contains(event.target)
-      ) {
+      if (langRef.current && !langRef.current.contains(event.target)) {
         setLangOpen(false)
       }
 
-      if (
-        profileRef.current &&
-        !profileRef.current.contains(event.target)
-      ) {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
         setProfileOpen(false)
       }
 
@@ -80,8 +71,8 @@ export default function Navbar() {
     return (
       <Link
         to={path}
-        className={`px-3 py-2 text-sm font-medium transition
-          ${active ? "text-white border-b-2 border-[#00A8E1]" : "text-gray-300 hover:text-white"}
+        className={`px-2 md:px-3 py-2 text-xs md:text-sm font-medium transition whitespace-nowrap
+        ${active ? "text-white border-b-2 border-[#00A8E1]" : "text-gray-300 hover:text-white"}
         `}
       >
         {name}
@@ -92,21 +83,26 @@ export default function Navbar() {
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-[#0F171E] backdrop-blur-md shadow-md">
 
-      <div className="flex items-center justify-between px-8 py-4 text-white">
+      <div className="flex items-center justify-between px-4 md:px-8 py-3 md:py-4 text-white">
 
         {/* LEFT */}
-        <div className="flex items-center gap-6">
-          <Link to="/" className="text-xl font-bold">
+        <div className="flex items-center gap-3 md:gap-6">
+
+          <Link to="/" className="text-lg md:text-xl font-bold whitespace-nowrap">
             prime video
           </Link>
 
-          {navItem("Home", "/")}
-          {navItem("Movies", "/movies")}
-          {navItem("Watchlist", "/watchlist")}
+          {/* Hide navigation on very small screens */}
+          <div className="hidden sm:flex items-center gap-1 md:gap-2">
+            {navItem("Home", "/")}
+            {navItem("Movies", "/movies")}
+            {navItem("Watchlist", "/watchlist")}
+          </div>
+
         </div>
 
         {/* RIGHT */}
-        <div className="flex items-center gap-6 relative">
+        <div className="flex items-center gap-2 md:gap-6 relative">
 
           {/* SEARCH */}
           <div ref={searchRef} className="relative">
@@ -121,7 +117,7 @@ export default function Navbar() {
             {showSearch && (
               <form
                 onSubmit={handleSearch}
-                className="absolute right-0 mt-2 bg-[#1A242F] p-3 rounded-lg shadow-lg w-64"
+                className="absolute right-0 mt-2 bg-[#1A242F] p-3 rounded-lg shadow-lg w-52 md:w-64"
               >
                 <input
                   autoFocus
@@ -133,7 +129,7 @@ export default function Navbar() {
                 />
 
                 {suggestions.length > 0 && (
-                  <div className="mt-2">
+                  <div className="mt-2 max-h-40 overflow-y-auto">
                     {suggestions.map(movie => (
                       <div
                         key={movie.id}
@@ -151,23 +147,24 @@ export default function Navbar() {
                 )}
               </form>
             )}
+
           </div>
 
           {/* LANGUAGE */}
           <div ref={langRef} className="relative">
             <button
               onClick={() => setLangOpen(!langOpen)}
-              className="hover:bg-white/10 px-3 py-2 rounded-md transition"
+              className="hover:bg-white/10 px-2 md:px-3 py-2 rounded-md transition text-sm"
             >
               EN
             </button>
 
             {langOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-[#1A242F] rounded-md shadow-lg">
+              <div className="absolute right-0 mt-2 w-36 md:w-40 bg-[#1A242F] rounded-md shadow-lg">
                 {languages.map(lang => (
                   <div
                     key={lang}
-                    className="px-4 py-2 hover:bg-[#243447] cursor-pointer transition"
+                    className="px-3 md:px-4 py-2 hover:bg-[#243447] cursor-pointer transition text-sm"
                     onClick={() => {
                       navigate(`/movies?lang=${lang}`)
                       setLangOpen(false)
@@ -183,13 +180,13 @@ export default function Navbar() {
           {/* PROFILE */}
           <div ref={profileRef} className="relative">
             <User
-              size={22}
+              size={20}
               className="cursor-pointer hover:scale-110 transition"
               onClick={() => setProfileOpen(!profileOpen)}
             />
 
             {profileOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-[#1A242F] rounded-md shadow-lg">
+              <div className="absolute right-0 mt-2 w-44 md:w-48 bg-[#1A242F] rounded-md shadow-lg text-sm">
                 <div className="px-4 py-2 hover:bg-[#243447] cursor-pointer">
                   Account & Settings
                 </div>
