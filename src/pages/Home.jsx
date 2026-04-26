@@ -23,6 +23,10 @@ export default function Home() {
           {/* Left side: Welcome text and sign-in button */}
           <div className="max-w-xl space-y-6">
 
+            <h2 className="text-2xl font-semibold text-gray-200">
+              Hi!
+            </h2>
+
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
               Welcome to Prime Video
             </h1>
