@@ -1,10 +1,14 @@
+// MovieCard component displays a movie poster with hover details and watchlist functionality
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
+// Component receives a movie object as prop
 export default function MovieCard({ movie }) {
 
+  // State for managing the user's watchlist
   const [watchlist, setWatchlist] = useState([])
 
+  // Load watchlist from localStorage on component mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem("watchlist")
@@ -16,6 +20,7 @@ export default function MovieCard({ movie }) {
     }
   }, [])
 
+  // Function to add or remove movie from watchlist
   const toggleWatchlist = () => {
     let updated
 

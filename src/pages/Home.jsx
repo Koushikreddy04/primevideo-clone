@@ -3,9 +3,11 @@ import Footer from "../components/Footer"
 import { Link } from "react-router-dom"
 import { movies } from "../data/movies"
 
+// This component renders the home page of the Prime Video app
+// It displays a welcome message and a grid of movie previews
 export default function Home() {
 
-  // Take first 6 movies for preview grid
+  // Get the first 6 movies from the data for the preview grid
   const previewMovies = movies.slice(0, 6)
 
   return (
@@ -15,9 +17,10 @@ export default function Home() {
 
       <div className="pt-[80px]">
 
+        {/* Main content section with left and right sides */}
         <div className="flex flex-col lg:flex-row items-center justify-between px-8 lg:px-16 py-16 gap-12">
 
-          {/* LEFT SIDE CONTENT */}
+          {/* Left side: Welcome text and sign-in button */}
           <div className="max-w-xl space-y-6">
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
@@ -37,9 +40,10 @@ export default function Home() {
 
           </div>
 
-          {/* RIGHT SIDE MOVIE GRID */}
+          {/* Right side: Movie preview grid */}
           <div className="grid grid-cols-2 gap-4">
 
+            {/* Loop through preview movies and render each one */}
             {previewMovies.map((movie) => (
               <div
                 key={movie.id}

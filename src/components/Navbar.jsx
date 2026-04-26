@@ -1,26 +1,34 @@
+// Navbar component with search, language filter, and profile menu
  import { Link, useNavigate, useLocation } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 import { Search, User } from "lucide-react"
 import { movies } from "../data/movies"
 
+// Main navigation bar component
 export default function Navbar() {
 
+  // State for search functionality
   const [searchTerm, setSearchTerm] = useState("")
   const [suggestions, setSuggestions] = useState([])
   const [showSearch, setShowSearch] = useState(false)
+  // State for dropdown menus
   const [langOpen, setLangOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
 
+  // Hooks for navigation and location
   const navigate = useNavigate()
   const location = useLocation()
 
+  // Refs for detecting outside clicks
   const searchRef = useRef(null)
   const langRef = useRef(null)
   const profileRef = useRef(null)
 
+  // Available languages for filtering
   const languages = ["Telugu", "Hindi", "Tamil", "Malayalam", "Kannada"]
 
   /* ---------------- Search Suggestions ---------------- */
+  // Update suggestions based on search term
   useEffect(() => {
     if (!searchTerm.trim()) {
       setSuggestions([])
@@ -34,6 +42,7 @@ export default function Navbar() {
     setSuggestions(filtered.slice(0, 5))
   }, [searchTerm])
 
+  // Handle search form submission
   const handleSearch = (e) => {
     e.preventDefault()
     if (searchTerm.trim()) {
@@ -43,6 +52,7 @@ export default function Navbar() {
   }
 
   /* ---------------- Close On Outside Click ---------------- */
+  // Effect to close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
 
@@ -75,6 +85,7 @@ export default function Navbar() {
     }
   }, [])
 
+  // Helper function to create navigation items with active state
   const navItem = (name, path) => {
     const active = location.pathname === path
     return (
@@ -94,7 +105,7 @@ export default function Navbar() {
 
       <div className="flex items-center justify-between px-8 py-4 text-white">
 
-        {/* LEFT */}
+        {/* LEFT SIDE: Logo and navigation links */}
         <div className="flex items-center gap-6">
           <Link to="/" className="text-xl font-bold">
             prime video
@@ -105,10 +116,10 @@ export default function Navbar() {
           {navItem("Watchlist", "/watchlist")}
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT SIDE: Search, language, profile */}
         <div className="flex items-center gap-6 relative">
 
-          {/* SEARCH */}
+          {/* SEARCH SECTION */}
           <div ref={searchRef} className="relative">
 
             <button
@@ -153,7 +164,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* LANGUAGE */}
+          {/* LANGUAGE DROPDOWN */}
           <div ref={langRef} className="relative">
             <button
               onClick={() => setLangOpen(!langOpen)}
@@ -180,7 +191,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* PROFILE */}
+          {/* PROFILE MENU */}
           <div ref={profileRef} className="relative">
             <User
               size={22}

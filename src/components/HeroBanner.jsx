@@ -1,5 +1,7 @@
+// HeroBanner component displays a featured movie with backdrop, title, description, and play button
 import { Link } from "react-router-dom"
 
+// Component takes a movie prop to display its details
 export default function HeroBanner({ movie }) {
   return (
     <div

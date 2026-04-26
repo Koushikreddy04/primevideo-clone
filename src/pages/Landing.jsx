@@ -1,12 +1,17 @@
+// Landing page component for user authentication
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
+// Component for the login/sign-in page
 export default function Landing() {
 
+  // Hook for navigation
   const navigate = useNavigate()
+  // State for email and password inputs
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  // Handle form submission for login
   const handleLogin = (e) => {
     e.preventDefault()
 

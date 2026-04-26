@@ -1,3 +1,4 @@
+// Movies page component that displays movie listings with filtering by language
 import { useLocation } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import HeroBanner from "../components/HeroBanner"
@@ -5,12 +6,15 @@ import MovieRow from "../components/MovieRow"
 import Footer from "../components/Footer"
 import { movies } from "../data/movies"
 
+// Main movies listing page (note: function named Home but it's the Movies page)
 export default function Home() {
 
+  // Get URL parameters for language filtering
   const location = useLocation()
   const params = new URLSearchParams(location.search)
   const selectedLang = params.get("lang")
 
+  // Filter movies based on selected language or show all
   const filteredMovies = selectedLang
     ? movies.filter(m => m.language === selectedLang)
     : movies
@@ -22,11 +26,12 @@ export default function Home() {
 
       <div className="pt-[80px]">
 
-        {/* Banner updates automatically */}
+        {/* Display hero banner for the first movie in filtered list */}
         {filteredMovies.length > 0 && (
           <HeroBanner movie={filteredMovies[0]} />
         )}
 
+        {/* Render movie rows based on language filter */}
         {selectedLang ? (
           <MovieRow
             title={`${selectedLang} Movies`}

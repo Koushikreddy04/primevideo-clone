@@ -1,3 +1,5 @@
+// Footer component for the Prime Video app
+// Displays logo, links, and copyright information
 export default function Footer() {
   return (
     <footer className="bg-[#0F171E] border-t border-[#1A242F] mt-16 py-10">

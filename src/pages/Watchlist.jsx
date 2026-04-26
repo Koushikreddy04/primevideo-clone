@@ -1,12 +1,16 @@
+// Watchlist page component that displays user's saved movies
 import Navbar from "../components/Navbar"
 import MovieRow from "../components/MovieRow"
 import { movies } from "../data/movies"
 
+// Component for the user's watchlist page
 export default function Watchlist() {
 
+  // Get watchlist IDs from localStorage
   const watchlistIds =
     JSON.parse(localStorage.getItem("watchlist")) || []
 
+  // Filter movies that are in the watchlist
   const watchlistMovies = movies.filter((movie) =>
     watchlistIds.includes(movie.id)
   )
@@ -22,6 +26,7 @@ export default function Watchlist() {
           My Watchlist
         </h2>
 
+        {/* Display watchlist movies or empty message */}
         {watchlistMovies.length > 0 ? (
           <MovieRow title="Saved Movies" movies={watchlistMovies} />
         ) : (

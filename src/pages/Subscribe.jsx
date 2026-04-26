@@ -1,9 +1,13 @@
+// Subscribe page component for handling user subscription and payment
 import { useNavigate } from "react-router-dom"
 
+// Component for the subscription page
 export default function Subscribe() {
 
+  // Hook for navigation after payment
   const navigate = useNavigate()
 
+  // Handle payment and update user subscription status
   const handlePayment = () => {
     const user = JSON.parse(localStorage.getItem("user"))
 
